@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:my_wallet2023/transaction_widget/new_transactionList.dart';
+import 'package:my_wallet2023/transaction_widget/transaction_list.dart';
+import 'package:my_wallet2023/transaction_widget/user_trans.dart';
 
 import 'Model/transaction.dart';
 
@@ -32,15 +36,15 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-   List<Transaction> transaction=[
+class MyHomePage extends StatefulWidget {
+  @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
 
-    Transaction( title:'boot camp',date: DateTime.now(),amount: 12.2, id: '01'),
-    Transaction( title:'course',date: DateTime.now(),amount: 13.2, id: '02'),
-    Transaction( title:'Yoga Routine',date: DateTime.now(),amount: 13.2, id: '03'),
-    Transaction( title:'Grocery',date: DateTime.now(),amount: 13.2, id: '04'),
-    Transaction( title:'facials',date: DateTime.now(),amount: 13.2, id: '05'),
-  ];
+class _MyHomePageState extends State<MyHomePage> {
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -48,18 +52,19 @@ class MyHomePage extends StatelessWidget {
       appBar: AppBar(
         leading: Icon(Icons.abc_outlined),
       ),
-      body: Container(
-        height: 300,
-        child: ListView.builder(itemBuilder: (ctx,index ){
-
-          return ListTile(
-            title: Text(transaction[index].title,style: Theme.of(context).textTheme.titleSmall,),
-            leading: Text(transaction[index].id),
-
-          );
-        },
-          itemCount: transaction.length,),
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Container(width: double.infinity,
+            child: Text('Chart'),
+            color: Colors.blue,),
+            UserTransactions(),
+          ],
+        ),
       ),
+      floatingActionButton: FloatingActionButton(onPressed: (){},child: Icon(Icons.add),),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
     );
   }
 }
